@@ -4,6 +4,7 @@ import Game from "./Game";
 import SettingsPopup from "./SettingsPopup";
 import TopScore from "./TopScore";
 import TopScoreService from "../TopScoreService";
+import { InputController } from "./InputController";
 
 export default class GameWrapper extends Component {
   state = {
@@ -11,9 +12,11 @@ export default class GameWrapper extends Component {
       width: 800,
       height: 600,
       speed: 500,
-      edgeWrapping: false
+      edgeWrapping: false,
+      input: {},
     },
-    showSettingsPopup: false
+    showSettingsPopup: false,
+    inputController: new InputController(),
   };
 
   showSettings = () => {
@@ -43,6 +46,7 @@ export default class GameWrapper extends Component {
           settings={this.state.settings}
           showSettings={this.showSettings}
           onGameOver={this.onGameOver}
+          inputController={this.state.inputController}
         />
         <TopScore topScore={TopScoreService.getTopScore()} />
         {this.state.showSettingsPopup && (

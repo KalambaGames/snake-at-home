@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import OptionsGroup from "./OptionsGroup";
 
 import "./OptionsScreen.css";
+import KeyboardOptionsGroup from "./KeyboardOptionsGroup";
 
 const OptionsScreen = ({ values, onChange }) => (
   <div className="OptionsScreen">
@@ -93,6 +94,13 @@ const OptionsScreen = ({ values, onChange }) => (
         onChange={value => onChange("edgeWrapping", value)}
       />
     </div>
+    <div className="Option">
+      <label>Keyboard settings</label>
+      <KeyboardOptionsGroup
+        options={values.input.keyboard}
+        onChange={keyboard => onChange("input", {...values.input, keyboard})}
+      />
+    </div>
   </div>
 );
 
@@ -101,7 +109,10 @@ OptionsScreen.propTypes = {
     width: PropTypes.number,
     height: PropTypes.number,
     speed: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-    edgeWrapping: PropTypes.bool
+    edgeWrapping: PropTypes.bool,
+    input: PropTypes.shape({
+      keyboard: PropTypes.array,
+    })
   }).isRequired,
   onChange: PropTypes.func
 };
